@@ -29,15 +29,20 @@ export class TripcostsService {
     throw Error('not parseable');
   }
 
-  /* mocked one
-  getData(): Observable<TripCost> {
-    return of(TRIPCOSTS);
-  }
-  */
   getData(): Observable<TripCost> {
     return this.http.get<any>(this.serverURL, httpOptions)
       .pipe(
         map(this.extractData)
       );
+  }
+
+  updateData(tripCost: TripCost): Observable<TripCost> {
+    return this.http.put<TripCost>(
+        this.serverURL, 
+        { value: tripCost }, 
+        httpOptions
+      ).pipe(
+        map(this.extractData)
+      );;
   }
 }

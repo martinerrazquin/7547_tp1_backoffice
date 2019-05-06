@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { MatSnackBar } from '@angular/material';
 
 import { TripcostsService } from '../tripcosts.service';
-import { TripCost} from '../tripcost';
+import { TripCost } from '../tripcost';
 
 import * as cloneDeep from 'lodash/cloneDeep';
 
@@ -18,7 +18,10 @@ export class TripcostsComponent implements OnInit {
   newTripCosts: TripCost;
   costsForm: FormGroup;
 
-  constructor(private tripCostsService: TripcostsService) { }
+  constructor(
+    private tripCostsService: TripcostsService, 
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.init();
@@ -39,49 +42,14 @@ export class TripcostsComponent implements OnInit {
   }
 
   initForm(): void {
+    var validations = [ Validators.required, Validators.min(0) ];
     this.costsForm = new FormGroup({
-      k1: new FormControl(
-        this.newTripCosts.k1,
-        [
-          Validators.required,
-          Validators.min(0)
-        ]
-      ),
-      k2: new FormControl(
-        this.newTripCosts.k2,
-        [
-          Validators.required,
-          Validators.min(0)
-        ]
-      ),
-      k3: new FormControl(
-        this.newTripCosts.k3,
-        [
-          Validators.required,
-          Validators.min(0)
-        ]
-      ),
-      k4: new FormControl(
-        this.newTripCosts.k4,
-        [
-          Validators.required,
-          Validators.min(0)
-        ]
-      ),
-      k5: new FormControl(
-        this.newTripCosts.k5,
-        [
-          Validators.required,
-          Validators.min(0)
-        ]
-      ),
-      k6: new FormControl(
-        this.newTripCosts.k6,
-        [
-          Validators.required,
-          Validators.min(0)
-        ]
-      )
+      k1: new FormControl(this.newTripCosts.k1, validations),
+      k2: new FormControl(this.newTripCosts.k2, validations),
+      k3: new FormControl(this.newTripCosts.k3, validations),
+      k4: new FormControl(this.newTripCosts.k4, validations),
+      k5: new FormControl(this.newTripCosts.k5, validations),
+      k6: new FormControl(this.newTripCosts.k6, validations)
     });
   }
 
@@ -92,8 +60,17 @@ export class TripcostsComponent implements OnInit {
   }
 
   onSubmit() {
-    // @ts-ignore
-    console.warn(this.costsForm.value);
+    this.tripCostsService.updateData(this.costsForm.value).subscribe(
+      (tripCosts) => {
+        this.openSnackBar('Actualizado con éxito');
+      }
+    );
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
+      duration: 2000,
+    });
   }
 
 }
