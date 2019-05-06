@@ -21,10 +21,10 @@ export class TripcostsService {
 
   constructor(private http: HttpClient) { }
 
-  private extractData(res: Response): TripCost {
-    const body = JSON.parse((res as any));
+  private extractData(res: any): TripCost {
+    const body = res;
     if (body && body.value) {
-      return body.value;
+      return body.value as TripCost;
     }
     throw Error('not parseable');
   }
@@ -35,12 +35,12 @@ export class TripcostsService {
   }
   */
   getData(): Observable<TripCost> {
-    console.warn(this.serverURL);
-    console.warn(httpOptions);
-    let data = this.http.get<any>(this.serverURL, httpOptions)
+    let asd = this.http.get<any>(this.serverURL, httpOptions)
       .pipe(
-        tap( d => console.warn(d))
-      ).subscribe( d => console.log(d));
+        map(this.extractData)
+      );
+    /*asd.subscribe( d => console.log(d));*/
     return of(TRIPCOSTS);
+    /*return asd;*/
   }
 }

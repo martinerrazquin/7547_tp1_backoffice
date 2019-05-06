@@ -21,27 +21,34 @@ export class TripcostsComponent implements OnInit {
   constructor(private tripCostsService: TripcostsService) { }
 
   ngOnInit() {
-    this.getTripCosts();
-    this.initForm();
+    this.init();
   }
 
-  getTripCosts(): void {
+  init(): void {
     this.tripCostsService.getData().subscribe(
-      (tripCosts) => { this.tripCosts = tripCosts; this.newTripCosts = cloneDeep(tripCosts); }
+      (tripCosts) => {
+        this.initData(tripCosts);
+        this.initForm();
+      }
     );
+  }
+
+  initData(tripCosts: TripCost): void {
+    this.tripCosts = tripCosts;
+    this.newTripCosts = cloneDeep(tripCosts);
   }
 
   initForm(): void {
     this.costsForm = new FormGroup({
       'k1': new FormControl(
-        this.newTripCosts.k1, 
+        this.newTripCosts.k1,
         [
-          Validators.required, 
+          Validators.required,
           Validators.min(0)
         ]
       ),
       'k2': new FormControl(
-        this.newTripCosts.k2, 
+        this.newTripCosts.k2,
         [
           Validators.required,
           Validators.min(0)
