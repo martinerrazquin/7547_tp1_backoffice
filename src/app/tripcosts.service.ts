@@ -35,12 +35,9 @@ export class TripcostsService {
   }
   */
   getData(): Observable<TripCost> {
-    let asd = this.http.get<any>(this.serverURL, httpOptions)
+    return this.http.get<any>(this.serverURL, httpOptions)
       .pipe(
         map(this.extractData)
       );
-    asd.subscribe( d => console.log(d));
-    /*return of(TRIPCOSTS);*/
-    return asd;
   }
 }
