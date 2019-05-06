@@ -9,7 +9,7 @@ import { TripCost} from './tripcost';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }),
 };
 
 @Injectable({
@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class TripcostsService {
 
-  private serverURL = 'localhost:3000/manage/constants/tripcosts';
+  private serverURL = 'http://localhost:3000/manage/constants/tripcosts';
 
   constructor(private http: HttpClient) { }
 
@@ -35,10 +35,12 @@ export class TripcostsService {
   }
   */
   getData(): Observable<TripCost> {
-    return this.http.get(this.serverURL, httpOptions)
+    console.warn(this.serverURL);
+    console.warn(httpOptions);
+    let data = this.http.get<any>(this.serverURL, httpOptions)
       .pipe(
-        tap( r => window.console.error(r) ),
-        map(this.extractData)
-    );
+        tap( d => console.warn(d))
+      ).subscribe( d => console.log(d));
+    return of(TRIPCOSTS);
   }
 }
