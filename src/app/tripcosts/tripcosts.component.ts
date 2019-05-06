@@ -43,7 +43,35 @@ export class TripcostsComponent implements OnInit {
       'k2': new FormControl(
         this.newTripCosts.k2, 
         [
-          Validators.required, 
+          Validators.required,
+          Validators.min(0)
+        ]
+      ),
+      'k3': new FormControl(
+        this.newTripCosts.k3,
+        [
+          Validators.required,
+          Validators.min(0)
+        ]
+      ),
+      'k4': new FormControl(
+        this.newTripCosts.k4,
+        [
+          Validators.required,
+          Validators.min(0)
+        ]
+      ),
+      'k5': new FormControl(
+        this.newTripCosts.k5,
+        [
+          Validators.required,
+          Validators.min(0)
+        ]
+      ),
+      'k6': new FormControl(
+        this.newTripCosts.k6,
+        [
+          Validators.required,
           Validators.min(0)
         ]
       )
