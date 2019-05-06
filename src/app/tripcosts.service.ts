@@ -39,8 +39,8 @@ export class TripcostsService {
       .pipe(
         map(this.extractData)
       );
-    /*asd.subscribe( d => console.log(d));*/
-    return of(TRIPCOSTS);
-    /*return asd;*/
+    asd.subscribe( d => console.log(d));
+    /*return of(TRIPCOSTS);*/
+    return asd;
   }
 }

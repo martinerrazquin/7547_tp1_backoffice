@@ -40,42 +40,42 @@ export class TripcostsComponent implements OnInit {
 
   initForm(): void {
     this.costsForm = new FormGroup({
-      'k1': new FormControl(
+      k1: new FormControl(
         this.newTripCosts.k1,
         [
           Validators.required,
           Validators.min(0)
         ]
       ),
-      'k2': new FormControl(
+      k2: new FormControl(
         this.newTripCosts.k2,
         [
           Validators.required,
           Validators.min(0)
         ]
       ),
-      'k3': new FormControl(
+      k3: new FormControl(
         this.newTripCosts.k3,
         [
           Validators.required,
           Validators.min(0)
         ]
       ),
-      'k4': new FormControl(
+      k4: new FormControl(
         this.newTripCosts.k4,
         [
           Validators.required,
           Validators.min(0)
         ]
       ),
-      'k5': new FormControl(
+      k5: new FormControl(
         this.newTripCosts.k5,
         [
           Validators.required,
           Validators.min(0)
         ]
       ),
-      'k6': new FormControl(
+      k6: new FormControl(
         this.newTripCosts.k6,
         [
           Validators.required,
@@ -92,6 +92,7 @@ export class TripcostsComponent implements OnInit {
   }
 
   onSubmit() {
+    // @ts-ignore
     console.warn(this.costsForm.value);
   }
 
