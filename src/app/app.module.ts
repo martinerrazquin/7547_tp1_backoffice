@@ -10,6 +10,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDividerModule} from '@angular/material/divider';
 import {MatInputModule} from '@angular/material/input';
 import { TripcostsComponent } from './tripcosts/tripcosts.component';
 
@@ -23,6 +26,9 @@ import { TripcostsComponent } from './tripcosts/tripcosts.component';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatDividerModule,
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,

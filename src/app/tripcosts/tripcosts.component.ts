@@ -10,13 +10,15 @@ import * as cloneDeep from 'lodash/cloneDeep';
 @Component({
   selector: 'app-tripcosts',
   templateUrl: './tripcosts.component.html',
-  styleUrls: ['./tripcosts.component.css']
+  styleUrls: ['./tripcosts.component.scss']
 })
 export class TripcostsComponent implements OnInit {
 
   tripCosts: TripCost;
   newTripCosts: TripCost;
   costsForm: FormGroup;
+  costsFormData: any;
+  objectKeys = Object.keys;
 
   constructor(
     private tripCostsService: TripcostsService, 
@@ -43,14 +45,15 @@ export class TripcostsComponent implements OnInit {
 
   initForm(): void {
     var validations = [ Validators.required, Validators.min(0) ];
-    this.costsForm = new FormGroup({
+    this.costsFormData = {
       k1: new FormControl(this.newTripCosts.k1, validations),
       k2: new FormControl(this.newTripCosts.k2, validations),
       k3: new FormControl(this.newTripCosts.k3, validations),
       k4: new FormControl(this.newTripCosts.k4, validations),
       k5: new FormControl(this.newTripCosts.k5, validations),
       k6: new FormControl(this.newTripCosts.k6, validations)
-    });
+    };
+    this.costsForm = new FormGroup(this.costsFormData);
   }
 
   getErrorMsg(control) {

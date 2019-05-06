@@ -38,8 +38,8 @@ export class TripcostsService {
 
   updateData(tripCost: TripCost): Observable<TripCost> {
     return this.http.put<TripCost>(
-        this.serverURL, 
-        { value: tripCost }, 
+        this.serverURL,
+        { value: tripCost },
         httpOptions
       ).pipe(
         map(this.extractData)

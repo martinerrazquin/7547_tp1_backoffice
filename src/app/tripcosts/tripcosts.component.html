@@ -1,48 +1,36 @@
-<h2> Constantes </h2>
-<div *ngIf="tripCosts">
-  <form [formGroup]="costsForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="outline">
-      <mat-label>k1</mat-label>
-      <input matInput formControlName="k1" placeholder="k1" type="number" step="1" min="0" required>
-      <mat-error *ngIf="costsForm.get('k1').invalid">{{getErrorMsg(costsForm.get('k1'))}}
-      </mat-error>
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="outline">
-      <mat-label>k2</mat-label>
-      <input matInput formControlName="k2" placeholder="k2" type="number" step="1" min="0" required>
-      <mat-error *ngIf="costsForm.get('k2').invalid">{{getErrorMsg(costsForm.get('k2'))}}
-      </mat-error>
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="outline">
-      <mat-label>k3</mat-label>
-      <input matInput formControlName="k3" placeholder="k3" type="number" step="1" min="0" required>
-      <mat-error *ngIf="costsForm.get('k3').invalid">{{getErrorMsg(costsForm.get('k3'))}}
-      </mat-error>
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="outline">
-      <mat-label>k4</mat-label>
-      <input matInput formControlName="k4" placeholder="k4" type="number" step="1" min="0" required>
-      <mat-error *ngIf="costsForm.get('k4').invalid">{{getErrorMsg(costsForm.get('k4'))}}
-      </mat-error>
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="outline">
-      <mat-label>k5</mat-label>
-      <input matInput formControlName="k5" placeholder="k5" type="number" step="1" min="0" required>
-      <mat-error *ngIf="costsForm.get('k5').invalid">{{getErrorMsg(costsForm.get('k5'))}}
-      </mat-error>
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="outline">
-      <mat-label>k6</mat-label>
-      <input matInput formControlName="k6" placeholder="k6" type="number" step="1" min="0" required>
-      <mat-error *ngIf="costsForm.get('k6').invalid">{{getErrorMsg(costsForm.get('k6'))}}
-      </mat-error>
-    </mat-form-field>
-    <br>
-    <button type="submit" [disabled]="!costsForm.valid">Submit</button>
-  </form>
+<div class="container content">
+  <h2 class="row ml-2"> Ajustes precio de viaje </h2>
+  <mat-divider></mat-divider>
+  <br>
+  <div class="row" *ngIf="tripCosts">
+    <div class="col-md-4">
+      <form class="container content ml-1" [formGroup]="costsForm" (ngSubmit)="onSubmit()">
+        <div class="row" *ngFor="let key of objectKeys(costsFormData)">
+          <mat-form-field class="col-12" appearance="outline">
+            <mat-label>{{key}}</mat-label>
+            <input matInput 
+              [formControlName]="key" 
+              [placeholder]="key"
+              type="number" 
+              step="1" 
+              min="0" 
+              required
+            >
+            <mat-error *ngIf="costsFormData[key].invalid">{{getErrorMsg(costsFormData[key])}}
+            </mat-error>
+          </mat-form-field>
+          <br>
+        </div>
+        <div class="row justify-content-end">
+          <button 
+            type="submit" 
+            [disabled]="!costsForm.valid" 
+            mat-raised-button color="primary"
+          >
+          Enviar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
