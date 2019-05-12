@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
-import {of as observableOf} from 'rxjs';
+import {MatPaginator, MatTableDataSource, MatButton} from '@angular/material';
+import {merge, Observable, of as observableOf, fromEvent} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 
 import { TripsService } from "../../services/trips.service";
@@ -21,22 +21,23 @@ export class TripListComponent implements OnInit {
     'origin', 
     'destination'
   ];
-  resultsLength: number = 100;
+  resultsLength: number;
   isLoading: boolean = false;
   dataSource: MatTableDataSource<Trip>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('reload') reloadButton: MatButton;
+  btnClicks: Observable<any>;
 
   constructor(private tripsService: TripsService) { 
   }
 
   ngOnInit() {
-    this.tripsService.getTrips(this.paginator.pageIndex)
-    .subscribe((tripsApi: TripsApi) => {
-      this.dataSource = new MatTableDataSource(tripsApi.pageContents);
-    });
+    this.btnClicks = fromEvent(this.reloadButton._elementRef.nativeElement, 'click');
 
-    this.paginator.page
+    this.btnClicks.subscribe(() => this.paginator.pageIndex = 0);
+
+    merge(this.btnClicks, this.paginator.page)
       .pipe(
         startWith({}),
         switchMap(() => {
@@ -58,5 +59,4 @@ export class TripListComponent implements OnInit {
         this.dataSource = new MatTableDataSource(trips)
       );
   }
-
 }
