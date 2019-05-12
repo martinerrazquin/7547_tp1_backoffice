@@ -1,10 +1,10 @@
-<div class="container content">
+<div class="container-fluid content">
   <h2 class="row ml-2"> Ajustes precio de viaje </h2>
   <mat-divider></mat-divider>
   <br>
   <div class="row" *ngIf="tripCosts">
     <div class="col-md-4">
-      <form class="container content ml-1" [formGroup]="costsForm" (ngSubmit)="onSubmit()">
+      <form class="container content" [formGroup]="costsForm" (ngSubmit)="onSubmit()">
         <div class="row" *ngFor="let key of objectKeys(costsFormData)">
           <mat-form-field class="col-12" appearance="outline">
             <mat-label>{{key}}</mat-label>

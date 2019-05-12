@@ -1,0 +1,8 @@
+@import '../main-theme';
+.sidenav {
+    background-color: mat-color($app-primary, lighter);
+}
+
+.active-route {
+    background-color: mat-color($app-primary);
+}

@@ -1,8 +1,27 @@
-<mat-toolbar color="primary">
-  <span>Pet Transport Admin</span>
-</mat-toolbar>
-<div class="m-3">
-  <app-tripcosts></app-tripcosts>  
+<div class="stretch">
+  <mat-toolbar color="primary">
+    <span>Pet Transport Admin</span>
+  </mat-toolbar>
+  <div class="container-fluid content stretch">
+    <mat-sidenav-container class="row stretch">
+      <mat-sidenav class="col-md-2 sidenav" mode="side" opened>
+        <mat-list>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/trips" routerLinkActive="active-route"> 
+            Viajes 
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/trip-costs" routerLinkActive="active-route"> 
+            Precios
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </mat-sidenav>
+      <mat-sidenav-content class="col-md-10">
+        <div class="m-3">
+          <router-outlet></router-outlet>  
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
 </div>
-
-
