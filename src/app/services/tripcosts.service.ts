@@ -4,13 +4,7 @@ import { Observable, of } from 'rxjs';  /* async */
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { TRIPCOSTS } from './mock-tripcosts'; /* mock value */
-import { TripCost} from './tripcost';
-
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }),
-};
+import { TripCost } from '../models/tripcost';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +24,7 @@ export class TripcostsService {
   }
 
   getData(): Observable<TripCost> {
-    return this.http.get<any>(this.serverURL, httpOptions)
+    return this.http.get<any>(this.serverURL, {})
       .pipe(
         map(this.extractData)
       );
@@ -40,7 +34,7 @@ export class TripcostsService {
     return this.http.put<TripCost>(
         this.serverURL,
         { value: tripCost },
-        httpOptions
+        {}
       ).pipe(
         map(this.extractData)
       );;

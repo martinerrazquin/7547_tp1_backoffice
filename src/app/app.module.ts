@@ -21,8 +21,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
-import { TripcostsComponent } from './tripcosts/tripcosts.component';
-import { TripListComponent } from './trip-list/trip-list.component';
+import { TripcostsComponent } from './components/tripcosts/tripcosts.component';
+import { TripListComponent } from './components/trip-list/trip-list.component';
 
 
 const appRoutes: Routes = [
@@ -43,7 +43,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     ),
     BrowserModule,
     BrowserAnimationsModule,
