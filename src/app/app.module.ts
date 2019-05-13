@@ -23,10 +23,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { TripcostsComponent } from './components/tripcosts/tripcosts.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
+import { TripCostHistoryComponent } from './components/trip-cost-history/trip-cost-history.component';
 
 
 const appRoutes: Routes = [
   { path: 'trip-costs', component: TripcostsComponent },
+  { path: 'trip-costs-history', component: TripCostHistoryComponent },
   { path: 'trips', component: TripListComponent },
   { path: '',
     redirectTo: '/trips',
@@ -38,7 +40,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     TripcostsComponent,
-    TripListComponent
+    TripListComponent,
+    TripCostHistoryComponent
   ],
   imports: [
     RouterModule.forRoot(
