@@ -3,10 +3,11 @@
 
 .sidenav {
     width: 200px;
-    height: 100px;
+    height: 150px;
 }
 
 .active-route {
     background-color: mat-color($app-primary);
+    color: white;
     @include mat-elevation(4);
 }

@@ -1,0 +1,74 @@
+<div class="container-fluid content">
+  <div class="row">
+    <nav class="col-12">
+      <ol class="breadcrumb light-background mat-elevation-z1">
+        <li class="breadcrumb-item clickable" routerLink="/">Inicio</li>
+        <li class="breadcrumb-item active">Historial de precios</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row mx-2 mb-2 justify-content-between align-items-center">
+    <h1> Historial de Precios </h1>
+    <button mat-icon-button #reload>
+      <i class="fa fa-refresh fa-2x"></i>
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row mt-4 justify-content-center">
+    <div class="col-11 mat-elevation-z8 justify-content-center">
+      <table mat-table [dataSource]="dataSource">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Fecha </th>
+          <td mat-cell *matCellDef="let element"> {{ element.createdAt | date : "short" }} </td>
+        </ng-container>
+
+        <!-- K1 Column -->
+        <ng-container matColumnDef="k1">
+          <th mat-header-cell *matHeaderCellDef> $/km chicas </th>
+          <td mat-cell *matCellDef="let element"> {{element.k1}} </td>
+        </ng-container>
+
+        <!-- K2 Column -->
+        <ng-container matColumnDef="k2">
+          <th mat-header-cell *matHeaderCellDef> $/km medianas </th>
+          <td mat-cell *matCellDef="let element"> {{element.k2}} </td>
+        </ng-container>
+
+        <!-- K3 Column -->
+        <ng-container matColumnDef="k3">
+          <th mat-header-cell *matHeaderCellDef> $/km grandes </th>
+          <td mat-cell *matCellDef="let element"> {{element.k3}} </td>
+        </ng-container>
+
+        <!-- K4 Column -->
+        <ng-container matColumnDef="k4">
+          <th mat-header-cell *matHeaderCellDef> $/km acompañante </th>
+          <td mat-cell *matCellDef="let element"> {{element.k4}} </td>
+        </ng-container>
+
+        <!-- K5 Column -->
+        <ng-container matColumnDef="k5">
+          <th mat-header-cell *matHeaderCellDef> Multiplicador </th>
+          <td mat-cell *matCellDef="let element"> {{element.k5}} </td>
+        </ng-container>
+
+        <!-- K6 Column -->
+        <ng-container matColumnDef="k6">
+          <th mat-header-cell *matHeaderCellDef> Bajada de Bandera </th>
+          <td mat-cell *matCellDef="let element"> {{element.k6}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [length]="resultsLength" [pageSize]="10">
+      </mat-paginator>
+    </div>
+  </div>
+</div>
