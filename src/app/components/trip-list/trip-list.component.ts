@@ -19,7 +19,8 @@ export class TripListComponent implements OnInit {
     'client', 
     'driver', 
     'origin', 
-    'destination'
+    'destination',
+    'actions'
   ];
   resultsLength: number;
   isLoading: boolean = false;
