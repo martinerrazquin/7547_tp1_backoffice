@@ -1,0 +1,12 @@
+@import '../main-theme';
+@import '~@angular/material/theming';
+
+.sidenav {
+    width: 200px;
+    height: 100px;
+}
+
+.active-route {
+    background-color: mat-color($app-primary);
+    @include mat-elevation(4);
+}

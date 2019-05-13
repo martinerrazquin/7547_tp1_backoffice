@@ -1,4 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/bootstrap';
+
+$fa-font-path: '../node_modules/font-awesome/fonts';
+@import '../node_modules/font-awesome/scss/font-awesome';
+
+@import "main-theme.scss";
+
+/* Include theme styles for core and each component used in your app.
+Alternatively, you can import and @include the theme mixins for each component
+that you are using.*/
+@include angular-material-theme($app-theme);
+
+body, .stretch {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+};
+
+.light-background {
+    background-color: mat-color($app-primary, lighter);
+}
+
+.clickable {
+    cursor: pointer;
+}

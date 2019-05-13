@@ -1,10 +1,19 @@
-<div class="container content">
-  <h2 class="row ml-2"> Ajustes precio de viaje </h2>
+<div class="container-fluid content">
+  <div class="row">
+    <nav class="col-12">
+      <ol class="breadcrumb breadcrumb-arrow light-background mat-elevation-z1">
+        <li class="breadcrumb-item clickable" routerLink="/">Inicio</li>
+        <li class="breadcrumb-item active">Ajustes precio de viaje</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row m-2 justify-content-between align-items-center">
+    <h1> Ajustes Precio de Viaje </h1>
+  </div>
   <mat-divider></mat-divider>
-  <br>
-  <div class="row" *ngIf="tripCosts">
+  <div class="row mt-4" *ngIf="tripCosts">
     <div class="col-md-4">
-      <form class="container content ml-1" [formGroup]="costsForm" (ngSubmit)="onSubmit()">
+      <form class="container content" [formGroup]="costsForm" (ngSubmit)="onSubmit()">
         <div class="row" *ngFor="let key of objectKeys(costsFormData)">
           <mat-form-field class="col-12" appearance="outline">
             <mat-label>{{key}}</mat-label>

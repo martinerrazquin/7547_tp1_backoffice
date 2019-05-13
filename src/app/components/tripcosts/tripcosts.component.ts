@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
-import { TripcostsService } from '../tripcosts.service';
-import { TripCost } from '../tripcost';
+import { TripcostsService } from '../../services/tripcosts.service';
+import { TripCost } from '../../models/tripcost';
 
 import * as cloneDeep from 'lodash/cloneDeep';
 
