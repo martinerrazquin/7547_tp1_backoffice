@@ -11,8 +11,8 @@
     <h1> Ajustes Precio de Viaje </h1>
   </div>
   <mat-divider></mat-divider>
-  <div class="row mt-4" *ngIf="tripCosts">
-    <div class="col-md-4">
+  <div class="row mx-3 mt-4" *ngIf="tripCosts">
+    <div class="col-md-4 card p-3 mat-elevation-z2">
       <form class="container content" [formGroup]="costsForm" (ngSubmit)="onSubmit()">
         <div class="row" *ngFor="let key of objectKeys(costsFormData)">
           <mat-form-field class="col-12" appearance="outline">
