@@ -10,7 +10,7 @@ import { Trip } from '../models/trip';
 })
 
 export class TripsService {
-  API_URL: string = "http://localhost:3000/";
+  API_URL: string = "https://stagingserver7547.herokuapp.com/"; // "http://localhost:3000/";
 
   constructor(private http: HttpClient) { }
 

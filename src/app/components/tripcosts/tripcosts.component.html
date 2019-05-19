@@ -12,23 +12,23 @@
   </div>
   <mat-divider></mat-divider>
   <div class="row mx-3 mt-4" *ngIf="tripCosts">
-    <div class="col-md-4 card p-3 mat-elevation-z2">
+    <div class="col-md-12 card p-3 mat-elevation-z2">
       <form class="container content" [formGroup]="costsForm" (ngSubmit)="onSubmit()">
-        <div class="row" *ngFor="let key of objectKeys(costsFormData)">
-          <mat-form-field class="col-12" appearance="outline">
-            <mat-label>{{key}}</mat-label>
+        <br>
+        <div class="row">
+          <mat-form-field class="col-md-4" appearance="outline" *ngFor="let key of objectKeys(costsFormData)">
+            <mat-label>{{costsFormData[key].displayName}}</mat-label>
             <input matInput 
-              [formControlName]="key" 
+              [formControlName]="key"
               [placeholder]="key"
               type="number" 
               step="1" 
               min="0" 
               required
             >
-            <mat-error *ngIf="costsFormData[key].invalid">{{getErrorMsg(costsFormData[key])}}
+            <mat-error *ngIf="costsFormData[key].control.invalid">{{getErrorMsg(costsFormData[key].control)}}
             </mat-error>
           </mat-form-field>
-          <br>
         </div>
         <div class="row justify-content-end">
           <button 

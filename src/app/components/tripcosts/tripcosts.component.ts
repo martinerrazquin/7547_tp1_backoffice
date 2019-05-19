@@ -46,14 +46,20 @@ export class TripcostsComponent implements OnInit {
   initForm(): void {
     var validations = [ Validators.required, Validators.min(0) ];
     this.costsFormData = {
-      k1: new FormControl(this.newTripCosts.k1, validations),
-      k2: new FormControl(this.newTripCosts.k2, validations),
-      k3: new FormControl(this.newTripCosts.k3, validations),
-      k4: new FormControl(this.newTripCosts.k4, validations),
-      k5: new FormControl(this.newTripCosts.k5, validations),
-      k6: new FormControl(this.newTripCosts.k6, validations)
+      k1: { displayName: "$/km chicas", control: new FormControl(this.newTripCosts.k1, validations) },
+      k2: { displayName: "$/km medianas", control: new FormControl(this.newTripCosts.k2, validations) },
+      k3: { displayName: "$/km grandes", control: new FormControl(this.newTripCosts.k3, validations) },
+      k4: { displayName: "$/km acompañante", control: new FormControl(this.newTripCosts.k4, validations) },
+      k5: { displayName: "Multiplicador", control: new FormControl(this.newTripCosts.k5, validations) },
+      k6: { displayName: "Bajada de bandera", control: new FormControl(this.newTripCosts.k6, validations) }
     };
-    this.costsForm = new FormGroup(this.costsFormData);
+
+    var formControls = {};
+    for (let key of Object.keys(this.costsFormData)) {
+      formControls[key] = this.costsFormData[key].control;
+    }
+
+    this.costsForm = new FormGroup(formControls);
   }
 
   getErrorMsg(control) {
