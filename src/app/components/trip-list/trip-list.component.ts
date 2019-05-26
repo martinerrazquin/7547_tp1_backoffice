@@ -14,11 +14,12 @@ import { Trip } from '../../models/trip';
 })
 export class TripListComponent implements OnInit {
   displayedColumns: string[] = [
-    'id', 
-    'status', 
-    'client', 
-    'driver', 
-    'origin', 
+    'id',
+    'date',
+    'status',
+    'client',
+    'driver',
+    'origin',
     'destination',
     'actions'
   ];
@@ -30,7 +31,7 @@ export class TripListComponent implements OnInit {
   @ViewChild('reload') reloadButton: MatButton;
   btnClicks: Observable<any>;
 
-  constructor(private tripsService: TripsService) { 
+  constructor(private tripsService: TripsService) {
   }
 
   ngOnInit() {
@@ -56,7 +57,7 @@ export class TripListComponent implements OnInit {
           this.isLoading = false;
           return observableOf([]);
         })
-      ).subscribe(trips => 
+      ).subscribe(trips =>
         this.dataSource = new MatTableDataSource(trips)
       );
   }
