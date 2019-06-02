@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator, MatTableDataSource, MatButton} from '@angular/material';
+import {MatPaginator, MatTableDataSource, MatButton, MatSlideToggle} from '@angular/material';
 import {merge, Observable, of as observableOf, fromEvent} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import {FormGroup, FormControl} from '@angular/forms';
 
 import { TripsService } from "../../services/trips.service";
 import { TripsApi } from '../../models/trips-api';
@@ -23,9 +24,17 @@ export class TripListComponent implements OnInit {
     'destination',
     'actions'
   ];
+
+  filterControls = {
+    driverName: new FormControl(''),
+    showOnlyCurrent: new FormControl(false)
+  };
+  filtersForm = new FormGroup(this.filterControls);
+
   resultsLength: number;
   isLoading: boolean = false;
   dataSource: MatTableDataSource<Trip>;
+  
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('reload') reloadButton: MatButton;
@@ -39,26 +48,29 @@ export class TripListComponent implements OnInit {
 
     this.btnClicks.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.btnClicks, this.paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          this.isLoading = true;
-          return this.tripsService.getTrips(this.paginator.pageIndex);
-        }),
-        map((tripsApi: TripsApi) => {
-          this.isLoading = false;
-          this.resultsLength = tripsApi.total;
+    merge(
+      this.filtersForm.valueChanges, 
+      this.btnClicks, 
+      this.paginator.page
+    ).pipe(
+      startWith({}),
+      switchMap(() => {
+        this.isLoading = true;
+        return this.tripsService.getTrips(this.paginator.pageIndex, this.filtersForm.value);
+      }),
+      map((tripsApi: TripsApi) => {
+        this.isLoading = false;
+        this.resultsLength = tripsApi.total;
 
-          return tripsApi.pageContents;
-        }),
-        catchError(() => {
-          // TODO: Handle error.
-          this.isLoading = false;
-          return observableOf([]);
-        })
-      ).subscribe(trips =>
-        this.dataSource = new MatTableDataSource(trips)
-      );
+        return tripsApi.pageContents;
+      }),
+      catchError(() => {
+        // TODO: Handle error.
+        this.isLoading = false;
+        return observableOf([]);
+      })
+    ).subscribe(trips =>
+      this.dataSource = new MatTableDataSource(trips)
+    );
   }
 }

@@ -20,6 +20,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { TripcostsComponent } from './components/tripcosts/tripcosts.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
@@ -64,6 +65,7 @@ const appRoutes: Routes = [
     MatListModule,
     MatToolbarModule,
     MatPaginatorModule,
+    MatSlideToggleModule,
     MatSidenavModule,
     MatDividerModule,
     FormsModule,

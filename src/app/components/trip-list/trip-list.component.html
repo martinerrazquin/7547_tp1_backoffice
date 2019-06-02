@@ -14,6 +14,16 @@
     </button>
   </div>
   <mat-divider></mat-divider>
+  <form [formGroup]="filtersForm"
+    class="row mt-2 ml-2 mr-4 justify-content-between align-items-center">
+    <mat-form-field class="col-md-8">
+      <mat-label>Chofer</mat-label>
+      <input matInput [formControlName]="'driverName'" placeholder="John Doe">
+    </mat-form-field>
+    <mat-slide-toggle [formControlName]="'showOnlyCurrent'" color="primary" labelPosition="before">
+      Solo viajes en curso
+    </mat-slide-toggle>
+  </form>
   <div class="row mx-3 mt-4 justify-content-center">
     <div class="col-12 mat-elevation-z8 justify-content-center">
       <table mat-table [dataSource]="dataSource">

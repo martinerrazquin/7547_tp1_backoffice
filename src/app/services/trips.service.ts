@@ -20,9 +20,11 @@ export class TripsService {
     return this.http.get<Trip>(requestUrl);
   }
 
-  getTrips(pageNum: number): Observable<TripsApi> {
+
+  getTrips(pageNum: number, filters: any): Observable<TripsApi> {
     const href = API_URL + 'trips';
-    const requestUrl = `${href}?page=${pageNum}`;
+    const requestUrl = `${href}?page=${pageNum}&driver=${filters.driverName}`
+                        + `&onlyCurrent=${filters.showOnlyCurrent}`;
     return this.http.get<TripsApi>(requestUrl);
   }
 }
