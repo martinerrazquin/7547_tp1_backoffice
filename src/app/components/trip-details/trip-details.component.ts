@@ -1,11 +1,16 @@
+/// <reference types="@types/googlemaps" />
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+declare let google: any;   /* si esto no anda la culpa es de https://stackoverflow.com/questions/52364715/angular-6-types-googlemaps-index-d-ts-is-not-a-module */
 
 import { TripsService } from "../../services/trips.service";
 import { Trip } from '../../models/trip';
 import { UsersService } from "../../services/users.service";
 import { User, NO_USER } from "../../models/user";
+
+
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-trip-details',
@@ -21,6 +26,8 @@ export class TripDetailsComponent implements OnInit {
   clientData: User;
   driverData: User;
   paymentMethod: string;
+  @ViewChild('gmap') gmapElement: any;
+  map: google.maps.Map;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,7 +73,7 @@ export class TripDetailsComponent implements OnInit {
         this.loadedDriver();
       }
       console.log(this.trip);
-      /*mostrar lindo el payment method*/
+      /* mostrar lindo el payment method */
       switch (trip.paymentMethod) {
         case "mp": {
           this.paymentMethod = "MercadoPago";
@@ -81,6 +88,13 @@ export class TripDetailsComponent implements OnInit {
           break;
         }
       }
+      /* inicializar el mapa */
+      var mapProp = {
+        center: new google.maps.LatLng(this.trip.origin.lat, this.trip.origin.lng),
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
     });
   }
 
