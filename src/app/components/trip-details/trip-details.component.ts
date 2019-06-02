@@ -69,7 +69,7 @@ export class TripDetailsComponent implements OnInit {
       /*mostrar lindo el payment method*/
       switch (trip.paymentMethod) {
         case "mp": {
-          this.paymentMethod = "Efectivo";
+          this.paymentMethod = "MercadoPago";
           break;
         }
         case "card": {
