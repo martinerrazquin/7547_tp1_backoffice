@@ -89,12 +89,7 @@ export class TripDetailsComponent implements OnInit {
         }
       }
       /* inicializar el mapa */
-      var mapProp = {
-        center: new google.maps.LatLng(this.trip.origin.lat, this.trip.origin.lng),
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+      this.initMap();
     });
   }
 
@@ -108,6 +103,43 @@ export class TripDetailsComponent implements OnInit {
     this.isLoadingDriver = false;
     this.isLoading = this.isLoadingClient || this.isLoadingDriver;
     console.log(this.driverData);
+  }
+
+  initMap(){
+    /* crear mapa, centrar en origen */
+    var origLatLng = new google.maps.LatLng(this.trip.origin.lat, this.trip.origin.lng);
+    var destLatLng = new google.maps.LatLng(this.trip.destination.lat, this.trip.destination.lng);
+    var mapProp = {
+      center: origLatLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+
+    /* markers */
+    var origMarker = new google.maps.Marker({position: origLatLng, map: this.map, label: 'O', title: 'Origen'});
+    var destMarker = new google.maps.Marker({position: destLatLng, map: this.map, label: 'D', title: 'Destino'});
+
+    /* route */
+    var waypoints = [origLatLng, destLatLng]; /* FIXME: agregar los otros waypoints*/
+    var suggRoute = new google.maps.Polyline({
+      path: waypoints, geodesic: true, strokeColor: '#324eee', strokeOpacity: 0.75,   strokeWeight: 3
+    });
+    suggRoute.setMap(this.map);
+
+    /* driver location marker */
+    var icon = {
+      url: "https://image.flaticon.com/icons/png/128/31/31126.png",
+      scaledSize: new google.maps.Size(30, 30),
+      origin: new google.maps.Point(0,0),
+      anchor: new google.maps.Point(15, 15)
+    };
+    var MOCK_POSITION = new google.maps.LatLng(
+      0.5*this.trip.origin.lat+0.5*this.trip.destination.lat,
+      0.3*this.trip.origin.lng+0.7*this.trip.destination.lng,
+    );
+    var driverMarker = new google.maps.Marker(
+      {position: MOCK_POSITION, map: this.map, icon: icon, title: 'Ubicación actual'});
   }
 
 }
