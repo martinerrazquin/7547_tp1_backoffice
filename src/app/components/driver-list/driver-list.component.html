@@ -11,40 +11,68 @@
     <h1> Administración de Choferes </h1>
   </div>
   <mat-divider class="mb-3"></mat-divider>
-  <div class="card mb-3 mat-elevation-z2" *ngFor="let driver of drivers">
-    <div class="row">
-      <div class="col-md-9 m-3">
-            <div class="pull-left font-weight-bold pr-2 pb-1">Nombre:</div>
-            <div> {{driver.name}} </div>
-            <div class="clearfix"></div>
-            <div class="pull-left font-weight-bold pr-2 pb-1"> Teléfono: </div>
-            <div> {{driver.phone}} </div>
-            <div class="clearfix"></div>
-            <div class="pull-left font-weight-bold pr-2 pb-1"> Dirección: </div>
-            <div> {{driver.address}} </div>
-            <div class="clearfix"></div>
-            <div class="pull-left font-weight-bold pr-2"> Fecha de Registro: </div>
-            <div> {{driver.createdAt | date: "dd/MM/yyyy"}} </div>
-            <div class="clearfix"></div>
-      </div>
-      <div class="col-md-2 row justify-content-center align-items-center p-2">
-        <button 
-          type="button" 
-          class="btn btn-danger" 
-          (click)="onToggleEnabledClick(driver.driverData.id, false)"
-          *ngIf="driver.driverData.enabledToDrive">
-          Deshabilitar
-        </button>
-        <button 
-          type="button" 
-          class="btn btn-success" 
-          (click)="onToggleEnabledClick(driver.driverData.id, true)"
-          *ngIf="!driver.driverData.enabledToDrive">
-          Habilitar
-        </button>
+  <div class="container-fluid">
+    <div class="row" *ngFor="let driver of drivers">
+      <div class="col-11 container-fluid card mb-3 mat-elevation-z2">
+        <div class="row m-2">
+          <div class="col-md-7">
+            <div class="pt-2 pb-1">
+              <div class="pull-left font-weight-bold pr-2">Nombre:</div>
+              <div> {{driver.name}} </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="pb-1">
+              <div class="pull-left font-weight-bold pr-2"> Teléfono: </div>
+              <div> {{driver.phone}} </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="pb-1">
+              <div class="pull-left font-weight-bold pr-2"> Dirección: </div>
+              <div> {{driver.address}} </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="pb-2">
+              <div class="pull-left font-weight-bold pr-2"> Fecha de registro: </div>
+              <div> {{driver.createdAt | date: "dd/MM/yyyy"}} </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="pt-4 pb-1">
+              <div class="pull-left font-weight-bold pr-2">Total a pagar</div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="pb-1">
+              <div class="pull-left font-weight-bold pr-2"> Mes actual: </div>
+              <div> {{ driver.summary.current.money | currency:'ARS':'symbol':'1.2-2':'es-AR' }} </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="pb-4">
+              <div class="pull-left font-weight-bold pr-2"> Mes anterior: </div>
+              <div> {{ driver.summary.previous.money | currency:'ARS':'symbol':'1.2-2':'es-AR' }} </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <div class="col-md-1 row justify-content-center align-items-center">
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="onToggleEnabledClick(driver.driverData.id, false)"
+              *ngIf="driver.driverData.enabledToDrive">
+              Deshabilitar
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="onToggleEnabledClick(driver.driverData.id, true)"
+              *ngIf="!driver.driverData.enabledToDrive">
+              Habilitar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
+      <mat-paginator [length]="resultsLength" [pageSize]="10">
+      </mat-paginator>
   </div>
-  <mat-paginator [length]="resultsLength" [pageSize]="10">
-  </mat-paginator>
 </div>

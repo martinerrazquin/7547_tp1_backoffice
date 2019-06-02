@@ -28,6 +28,9 @@ import { TripCostHistoryComponent } from './components/trip-cost-history/trip-co
 import { TripDetailsComponent } from './components/trip-details/trip-details.component';
 import { DriverListComponent } from './components/driver-list/driver-list.component';
 
+import { registerLocaleData } from '@angular/common';
+import localeAr from '@angular/common/locales/es-AR';
+registerLocaleData(localeAr);
 
 const appRoutes: Routes = [
   { path: 'trip-costs', component: TripcostsComponent },

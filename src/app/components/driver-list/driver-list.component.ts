@@ -37,6 +37,11 @@ export class DriverListComponent implements OnInit {
         this.isLoading = false;
         this.resultsLength = driversApi.total;
 
+        driversApi.pageContents = driversApi.pageContents.map((driver) => {
+          driver.summary = driversApi.summaries[driver.driverData.id];
+          return driver
+        });
+
         return driversApi.pageContents;
       }),
       catchError(() => {
