@@ -46,7 +46,10 @@ export class TripListComponent implements OnInit {
   ngOnInit() {
     this.btnClicks = fromEvent(this.reloadButton._elementRef.nativeElement, 'click');
 
-    this.btnClicks.subscribe(() => this.paginator.pageIndex = 0);
+    merge(
+      this.btnClicks,
+      this.filtersForm.valueChanges
+    ).subscribe(() => this.paginator.pageIndex = 0);
 
     merge(
       this.filtersForm.valueChanges, 
