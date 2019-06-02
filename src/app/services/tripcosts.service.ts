@@ -13,7 +13,7 @@ import { TripcostsApi } from '../models/trip-costs-api';
 
 export class TripcostsService {
 
-  serverURL: string = "https://stagingserver7547.herokuapp.com/"; // 'http://localhost:3000/';
+  serverURL: string = 'http://localhost:3000/'; // "https://stagingserver7547.herokuapp.com/";
 
   constructor(private http: HttpClient) { }
 

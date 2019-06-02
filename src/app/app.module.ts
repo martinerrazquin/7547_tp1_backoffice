@@ -25,6 +25,7 @@ import { TripcostsComponent } from './components/tripcosts/tripcosts.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { TripCostHistoryComponent } from './components/trip-cost-history/trip-cost-history.component';
 import { TripDetailsComponent } from './components/trip-details/trip-details.component';
+import { DriverListComponent } from './components/driver-list/driver-list.component';
 
 
 const appRoutes: Routes = [
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
   { path: 'trip-costs-history', component: TripCostHistoryComponent },
   { path: 'trips', component: TripListComponent },
   { path: 'trips/details/:id', component: TripDetailsComponent },
+  { path: 'drivers', component: DriverListComponent },
   { path: '',
     redirectTo: '/trips',
     pathMatch: 'full'
@@ -44,7 +46,8 @@ const appRoutes: Routes = [
     TripcostsComponent,
     TripListComponent,
     TripCostHistoryComponent,
-    TripDetailsComponent
+    TripDetailsComponent,
+    DriverListComponent
   ],
   imports: [
     RouterModule.forRoot(

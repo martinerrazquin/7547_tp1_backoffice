@@ -1,0 +1,50 @@
+<div class="container-fluid content">
+  <div class="row">
+    <nav class="col-12">
+      <ol class="breadcrumb light-background mat-elevation-z1">
+        <li class="breadcrumb-item clickable" routerLink="/">Home</li>
+        <li class="breadcrumb-item active">Choferes</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row mx-2 mb-2 justify-content-between align-items-center">
+    <h1> Administración de Choferes </h1>
+  </div>
+  <mat-divider class="mb-3"></mat-divider>
+  <div class="card mb-3 mat-elevation-z2" *ngFor="let driver of drivers">
+    <div class="row">
+      <div class="col-md-9 m-3">
+            <div class="pull-left font-weight-bold pr-2 pb-1">Nombre:</div>
+            <div> {{driver.name}} </div>
+            <div class="clearfix"></div>
+            <div class="pull-left font-weight-bold pr-2 pb-1"> Teléfono: </div>
+            <div> {{driver.phone}} </div>
+            <div class="clearfix"></div>
+            <div class="pull-left font-weight-bold pr-2 pb-1"> Dirección: </div>
+            <div> {{driver.address}} </div>
+            <div class="clearfix"></div>
+            <div class="pull-left font-weight-bold pr-2"> Fecha de Registro: </div>
+            <div> {{driver.createdAt | date: "dd/MM/yyyy"}} </div>
+            <div class="clearfix"></div>
+      </div>
+      <div class="col-md-2 row justify-content-center align-items-center p-2">
+        <button 
+          type="button" 
+          class="btn btn-danger" 
+          (click)="onToggleEnabledClick(driver.driverData.id, false)"
+          *ngIf="driver.driverData.enabledToDrive">
+          Deshabilitar
+        </button>
+        <button 
+          type="button" 
+          class="btn btn-success" 
+          (click)="onToggleEnabledClick(driver.driverData.id, true)"
+          *ngIf="!driver.driverData.enabledToDrive">
+          Habilitar
+        </button>
+      </div>
+    </div>
+  </div>
+  <mat-paginator [length]="resultsLength" [pageSize]="10">
+  </mat-paginator>
+</div>
