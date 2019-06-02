@@ -18,6 +18,11 @@
         <h5 class="card-header light-background">Información General</h5>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
+            <div class="pull-left"> Fecha: </div>
+            <div class="pull-right"> {{(trip.reservationDate || trip.createdAt) | date:'dd/MM/yyyy'}} </div>
+            <div class="clearfix"></div>
+          </li>
+          <li class="list-group-item">
             <div class="pull-left">Origen:</div>
             <div class="pull-right"> {{trip.origin.address || '-'}} </div>
             <div class="clearfix"></div>
@@ -46,6 +51,16 @@
           <li class="list-group-item">
             <div class="pull-left"> Comentarios: </div>
             <div class="pull-right"> {{trip.comments || '-'}} </div>
+            <div class="clearfix"></div>
+          </li>
+          <li class="list-group-item">
+            <div class="pull-left"> Método de Pago: </div>
+            <div class="pull-right"> {{paymentMethod || '-'}} </div>
+            <div class="clearfix"></div>
+          </li>
+          <li class="list-group-item">
+            <div class="pull-left"> Precio: </div>
+            <div class="pull-right"> {{trip.cost || '-'}} </div>
             <div class="clearfix"></div>
           </li>
         </ul>
@@ -78,6 +93,11 @@
             <div class="pull-right"> {{clientData.address || '-'}} </div>
             <div class="clearfix"></div>
           </li>
+          <li class="list-group-item">
+            <div class="pull-left"> Calificación del chofer: </div>
+            <div class="pull-right"> {{trip.clientRating.rating != 0 ? trip.clientRating.rating : '-'}} </div>
+            <div class="clearfix"></div>
+          </li>
         </ul>
       </div>
       <div class="card mb-4 mat-elevation-z2">
@@ -101,6 +121,11 @@
           <li class="list-group-item">
             <div class="pull-left"> Dirección: </div>
             <div class="pull-right"> {{driverData.address || '-'}} </div>
+            <div class="clearfix"></div>
+          </li>
+          <li class="list-group-item">
+            <div class="pull-left"> Calificación del cliente: </div>
+            <div class="pull-right"> {{trip.driverRating.rating != 0 ? trip.driverRating.rating : '-'}} </div>
             <div class="clearfix"></div>
           </li>
         </ul>

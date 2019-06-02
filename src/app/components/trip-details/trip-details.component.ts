@@ -20,6 +20,7 @@ export class TripDetailsComponent implements OnInit {
   isLoadingClient: boolean = true;
   clientData: User;
   driverData: User;
+  paymentMethod: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -65,6 +66,21 @@ export class TripDetailsComponent implements OnInit {
         this.loadedDriver();
       }
       console.log(this.trip);
+      /*mostrar lindo el payment method*/
+      switch (trip.paymentMethod) {
+        case "mp": {
+          this.paymentMethod = "Efectivo";
+          break;
+        }
+        case "card": {
+          this.paymentMethod = "Tarjeta de Crédito";
+          break;
+        }
+        case "cash": {
+          this.paymentMethod = "Efectivo";
+          break;
+        }
+      }
     });
   }
 

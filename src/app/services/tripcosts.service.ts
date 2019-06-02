@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { TripCost } from '../models/tripcost';
 import { TripcostsApi } from '../models/trip-costs-api';
+import {API_URL} from "./api_url";
 
 @Injectable({
   providedIn: 'root'
@@ -13,25 +14,23 @@ import { TripcostsApi } from '../models/trip-costs-api';
 
 export class TripcostsService {
 
-  serverURL: string = 'http://localhost:3000/'; // "https://stagingserver7547.herokuapp.com/";
-
-  constructor(private http: HttpClient) { }
+ constructor(private http: HttpClient) { }
 
   getData(): Observable<TripCost> {
     return this.http.get<TripCost>(
-      this.serverURL + 'manage/constants/tripcosts'
+      API_URL + 'manage/constants/tripcosts'
     );
   }
 
   getHistory(pageNum: number): Observable<TripcostsApi> {
-    const href = this.serverURL + 'manage/constants/tripcosts/history';
+    const href = API_URL + 'manage/constants/tripcosts/history';
     const requestUrl = `${href}?page=${pageNum}`;
     return this.http.get<TripcostsApi>(requestUrl);
   }
 
   updateData(tripCost: TripCost): Observable<TripCost> {
     return this.http.post<TripCost>(
-      this.serverURL + 'manage/constants/tripcosts', 
+      API_URL + 'manage/constants/tripcosts',
       tripCost
     );
   }
