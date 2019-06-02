@@ -1,4 +1,5 @@
 import { Location } from './location';
+import { DriverTripData } from "./driver-trip-data";
 
 export class Trip {
   id: number;
@@ -17,4 +18,5 @@ export class Trip {
   reservationDate: Date;
   createdAt: Date;
   updatedAt: Date;
+  driver: DriverTripData;
 }

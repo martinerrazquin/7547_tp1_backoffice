@@ -17,33 +17,33 @@
       <div class="card mb-4 mat-elevation-z2">
         <h5 class="card-header light-background">Información General</h5>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left">Origen:</div>
             <div class="pull-right"> {{trip.origin.address || '-'}} </div>
             <div class="clearfix"></div>
           </li>
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left"> Destino: </div>
             <div class="pull-right"> {{trip.destination.address || '-'}} </div>
             <div class="clearfix"></div>
           </li>
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left"> Estado: </div>
             <div class="pull-right"> {{trip.status || '-'}} </div>
             <div class="clearfix"></div>
           </li>
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left"> Mascotas: </div>
-            <div class="pull-right"> 
+            <div class="pull-right">
               {{
-                trip.petQuantities.small + ' pequeñas, ' + 
-                trip.petQuantities.medium + ' medianas y ' + 
+                trip.petQuantities.small + ' pequeñas, ' +
+                trip.petQuantities.medium + ' medianas y ' +
                 trip.petQuantities.big + ' grandes.'
-              }} 
+              }}
             </div>
             <div class="clearfix"></div>
           </li>
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left"> Comentarios: </div>
             <div class="pull-right"> {{trip.comments || '-'}} </div>
             <div class="clearfix"></div>
@@ -58,24 +58,24 @@
       <div class="card mb-4 mat-elevation-z2">
         <h5 class="card-header light-background">Cliente</h5>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left">Nombre:</div>
-            <div class="pull-right"> Rodrigo Zapico </div>
+            <div class="pull-right"> {{clientData.name || '-'}} </div>
             <div class="clearfix"></div>
           </li>
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left"> Email: </div>
-            <div class="pull-right"> rodri.zapico@gmail.com </div>
+            <div class="pull-right"> {{clientData.email || '-'}} </div>
             <div class="clearfix"></div>
           </li>
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left"> Teléfono: </div>
-            <div class="pull-right"> 541144444444 </div>
+            <div class="pull-right"> {{clientData.phone || '-'}} </div>
             <div class="clearfix"></div>
           </li>
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left"> Dirección: </div>
-            <div class="pull-right"> Carrasco 637 </div>
+            <div class="pull-right"> {{clientData.address || '-'}} </div>
             <div class="clearfix"></div>
           </li>
         </ul>
@@ -83,24 +83,24 @@
       <div class="card mb-4 mat-elevation-z2">
         <h5 class="card-header light-background">Chofer</h5>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left">Nombre:</div>
-            <div class="pull-right"> Martín Errazquín </div>
+            <div class="pull-right"> {{driverData.name || '-'}} </div>
             <div class="clearfix"></div>
           </li>
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left"> Email: </div>
-            <div class="pull-right"> errazquin.martin@gmail.com </div>
+            <div class="pull-right"> {{driverData.email || '-'}} </div>
             <div class="clearfix"></div>
           </li>
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left"> Teléfono: </div>
-            <div class="pull-right"> 541155555555 </div>
+            <div class="pull-right"> {{driverData.phone || '-'}} </div>
             <div class="clearfix"></div>
           </li>
-          <li class="list-group-item"> 
+          <li class="list-group-item">
             <div class="pull-left"> Dirección: </div>
-            <div class="pull-right"> Rafael Obligado 6692 </div>
+            <div class="pull-right"> {{driverData.address || '-'}} </div>
             <div class="clearfix"></div>
           </li>
         </ul>
