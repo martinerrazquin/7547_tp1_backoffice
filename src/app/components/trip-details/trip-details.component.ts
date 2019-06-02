@@ -28,6 +28,7 @@ export class TripDetailsComponent implements OnInit {
   paymentMethod: string;
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;
+  driverMarker: google.maps.Marker;
 
   constructor(
     private route: ActivatedRoute,
@@ -121,11 +122,14 @@ export class TripDetailsComponent implements OnInit {
     var destMarker = new google.maps.Marker({position: destLatLng, map: this.map, label: 'D', title: 'Destino'});
 
     /* route */
-    var waypoints = [origLatLng, destLatLng]; /* FIXME: agregar los otros waypoints*/
-    var suggRoute = new google.maps.Polyline({
-      path: waypoints, geodesic: true, strokeColor: '#324eee', strokeOpacity: 0.75,   strokeWeight: 3
-    });
-    suggRoute.setMap(this.map);
+    this.tripsService.getRoute(this.trip.origin, this.trip.destination).subscribe(
+      (route) => {
+        var suggRoute = new google.maps.Polyline({
+          path: route.waypoints, geodesic: true, strokeColor: '#324eee', strokeOpacity: 0.75,   strokeWeight: 3
+        });
+        suggRoute.setMap(this.map);
+      }
+    );
 
     /* driver location marker */
     var icon = {
@@ -138,8 +142,23 @@ export class TripDetailsComponent implements OnInit {
       0.5*this.trip.origin.lat+0.5*this.trip.destination.lat,
       0.3*this.trip.origin.lng+0.7*this.trip.destination.lng,
     );
-    var driverMarker = new google.maps.Marker(
+    this.driverMarker = new google.maps.Marker(
       {position: MOCK_POSITION, map: this.map, icon: icon, title: 'Ubicación actual'});
+
+    /* mocked things, FIXME */
+    this.updateDriverLocation();
   }
 
+  updateDriverLocation(){
+    /* si viaje no esta en curso, eliminar marker y no hacer nada */
+    if (!(['En camino', 'En origen', 'En viaje', 'Llegamos'].includes(this.trip.status))){
+      this.driverMarker.setMap(null);
+      return;
+    }
+    this.tripsService.getTripLocation(this.trip.id).subscribe(
+      (loc) => {
+        var newPos = new google.maps.LatLng(loc.currentLocation.lat, loc.currentLocation.lng);
+        this.driverMarker.setPosition(newPos);
+      });
+  }
 }
