@@ -1,4 +1,6 @@
 import { Location } from './location';
+import { DriverTripData } from "./driver-trip-data";
+import { Rating } from "./rating";
 
 export class Trip {
   id: number;
@@ -17,4 +19,8 @@ export class Trip {
   reservationDate: Date;
   createdAt: Date;
   updatedAt: Date;
+  driver: DriverTripData;
+  cost: number;
+  driverRating: Rating;
+  clientRating: Rating;
 }
