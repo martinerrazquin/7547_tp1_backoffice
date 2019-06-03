@@ -3,7 +3,40 @@
     <span>Pet Transport Admin</span>
   </mat-toolbar>
   <div class="container-fluid content stretch">
-    <mat-sidenav-container class="stretch">
+    <div class="stretch row justify-content-center align-items-center"  *ngIf="!authenticated">
+      <div class="col-md-3 card mb-3 mat-elevation-z2">
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="authenticate()"
+          class="container content m-2"
+        >
+          <div class="row justify-content-center">
+            <mat-error [hidden]="!invalidLogin">Credenciales Inválidas</mat-error>
+          </div>
+          <div class="row justify-content-center">
+            <mat-form-field class="col-12">
+              <mat-label>Usuario</mat-label>
+              <input matInput [formControlName]="'user'">
+            </mat-form-field>
+          </div>
+          <div class="row justify-content-center">
+            <mat-form-field class="col-12">
+              <mat-label>Contraseña</mat-label>
+              <input matInput type="password" [formControlName]="'password'">
+            </mat-form-field>
+          </div>
+          <div class="row justify-content-center">
+            <button
+              type="submit"
+              mat-raised-button color="primary"
+            >
+            Acceder
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <mat-sidenav-container class="stretch" *ngIf="authenticated">
       <mat-sidenav class="sidenav p-0 mt-4 mat-elevation-z2" mode="side" opened>
         <mat-list class="p-0">
           <mat-divider></mat-divider>
@@ -21,6 +54,10 @@
           <mat-divider></mat-divider>
           <mat-list-item routerLink="/drivers" routerLinkActive="active-route"> 
             Choferes
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item (click)="logout()">
+            Salir
           </mat-list-item>
           <mat-divider></mat-divider>
         </mat-list>
