@@ -112,10 +112,16 @@ export class TripDetailsComponent implements OnInit {
     /* crear mapa, centrar en origen */
     var origLatLng = new google.maps.LatLng(this.trip.origin.lat, this.trip.origin.lng);
     var destLatLng = new google.maps.LatLng(this.trip.destination.lat, this.trip.destination.lng);
+
+    var MOCK_POSITION = new google.maps.LatLng(
+      0.5*this.trip.origin.lat+0.5*this.trip.destination.lat,
+      0.5*this.trip.origin.lng+0.5*this.trip.destination.lng,
+    );
+
     var mapProp = {
-      center: origLatLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      center: MOCK_POSITION,
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
 
@@ -140,10 +146,6 @@ export class TripDetailsComponent implements OnInit {
       origin: new google.maps.Point(0,0),
       anchor: new google.maps.Point(15, 15)
     };
-    var MOCK_POSITION = new google.maps.LatLng(
-      0.5*this.trip.origin.lat+0.5*this.trip.destination.lat,
-      0.3*this.trip.origin.lng+0.7*this.trip.destination.lng,
-    );
     this.driverMarker = new google.maps.Marker(
       {position: MOCK_POSITION, map: this.map, icon: icon, title: 'Ubicación actual'});
 
@@ -163,4 +165,5 @@ export class TripDetailsComponent implements OnInit {
         this.driverMarker.setPosition(newPos);
       });
   }
+
 }
