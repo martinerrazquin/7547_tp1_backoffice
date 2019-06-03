@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 declare let google: any;   /* si esto no anda la culpa es de https://stackoverflow.com/questions/52364715/angular-6-types-googlemaps-index-d-ts-is-not-a-module */
+import { timer } from 'rxjs';
 
 import { TripsService } from "../../services/trips.service";
 import { Trip } from '../../models/trip';
@@ -29,6 +30,7 @@ export class TripDetailsComponent implements OnInit {
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;
   driverMarker: google.maps.Marker;
+  source$ = timer(0,3000);
 
   constructor(
     private route: ActivatedRoute,
@@ -145,8 +147,8 @@ export class TripDetailsComponent implements OnInit {
     this.driverMarker = new google.maps.Marker(
       {position: MOCK_POSITION, map: this.map, icon: icon, title: 'Ubicación actual'});
 
-    /* mocked things, FIXME */
-    this.updateDriverLocation();
+    /* update every 3 seconds */
+    this.source$.subscribe((_) => this.updateDriverLocation());
   }
 
   updateDriverLocation(){
