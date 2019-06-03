@@ -12,9 +12,9 @@
     <h1> Detalles de Viaje </h1>
   </div>
   <mat-divider></mat-divider>
-  <div class="row mx-3 mt-4" *ngIf="!isLoading">
+  <div class="row mx-3 mt-4">
     <div class="col-lg-7">
-      <div class="card mb-4 mat-elevation-z2">
+      <div class="card mb-4 mat-elevation-z2" *ngIf="!isLoading">
         <h5 class="card-header light-background">Información General</h5>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
@@ -70,12 +70,16 @@
           </li>
         </ul>
       </div>
-      <div class="card mb-4 mat-elevation-z2">
+      <div class="card mb-4 mat-elevation-z2" [hidden]="isLoading">
         <h5 class="card-header light-background">Seguimiento</h5>
+        <div>
+          <div #gmap style="width:100%;height:400px"></div>
+
+        </div>
       </div>
     </div>
     <div class="col-lg-5">
-      <div class="card mb-4 mat-elevation-z2">
+      <div class="card mb-4 mat-elevation-z2" *ngIf="!isLoading">
         <h5 class="card-header light-background">Cliente</h5>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
@@ -105,7 +109,7 @@
           </li>
         </ul>
       </div>
-      <div class="card mb-4 mat-elevation-z2">
+      <div class="card mb-4 mat-elevation-z2" *ngIf="!isLoading">
         <h5 class="card-header light-background">Chofer</h5>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">

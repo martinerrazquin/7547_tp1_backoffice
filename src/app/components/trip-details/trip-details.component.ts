@@ -1,11 +1,17 @@
+/// <reference types="@types/googlemaps" />
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+declare let google: any;   /* si esto no anda la culpa es de https://stackoverflow.com/questions/52364715/angular-6-types-googlemaps-index-d-ts-is-not-a-module */
+import { timer } from 'rxjs';
 
 import { TripsService } from "../../services/trips.service";
 import { Trip } from '../../models/trip';
 import { UsersService } from "../../services/users.service";
 import { User, NO_USER } from "../../models/user";
+
+
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-trip-details',
@@ -21,6 +27,10 @@ export class TripDetailsComponent implements OnInit {
   clientData: User;
   driverData: User;
   paymentMethod: string;
+  @ViewChild('gmap') gmapElement: any;
+  map: google.maps.Map;
+  driverMarker: google.maps.Marker;
+  source$ = timer(0,3000);
 
   constructor(
     private route: ActivatedRoute,
@@ -66,7 +76,7 @@ export class TripDetailsComponent implements OnInit {
         this.loadedDriver();
       }
       console.log(this.trip);
-      /*mostrar lindo el payment method*/
+      /* mostrar lindo el payment method */
       switch (trip.paymentMethod) {
         case "mp": {
           this.paymentMethod = "MercadoPago";
@@ -81,6 +91,8 @@ export class TripDetailsComponent implements OnInit {
           break;
         }
       }
+      /* inicializar el mapa */
+      this.initMap();
     });
   }
 
@@ -94,6 +106,64 @@ export class TripDetailsComponent implements OnInit {
     this.isLoadingDriver = false;
     this.isLoading = this.isLoadingClient || this.isLoadingDriver;
     console.log(this.driverData);
+  }
+
+  initMap(){
+    /* crear mapa, centrar en origen */
+    var origLatLng = new google.maps.LatLng(this.trip.origin.lat, this.trip.origin.lng);
+    var destLatLng = new google.maps.LatLng(this.trip.destination.lat, this.trip.destination.lng);
+
+    var MOCK_POSITION = new google.maps.LatLng(
+      0.5*this.trip.origin.lat+0.5*this.trip.destination.lat,
+      0.5*this.trip.origin.lng+0.5*this.trip.destination.lng,
+    );
+
+    var mapProp = {
+      center: MOCK_POSITION,
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+    };
+    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+
+    /* markers */
+    var origMarker = new google.maps.Marker({position: origLatLng, map: this.map, label: 'O', title: 'Origen'});
+    var destMarker = new google.maps.Marker({position: destLatLng, map: this.map, label: 'D', title: 'Destino'});
+
+    /* route */
+    this.tripsService.getRoute(this.trip.origin, this.trip.destination).subscribe(
+      (route) => {
+        var suggRoute = new google.maps.Polyline({
+          path: route.waypoints, geodesic: true, strokeColor: '#324eee', strokeOpacity: 0.75,   strokeWeight: 3
+        });
+        suggRoute.setMap(this.map);
+      }
+    );
+
+    /* driver location marker */
+    var icon = {
+      url: "https://image.flaticon.com/icons/png/128/31/31126.png",
+      scaledSize: new google.maps.Size(30, 30),
+      origin: new google.maps.Point(0,0),
+      anchor: new google.maps.Point(15, 15)
+    };
+    this.driverMarker = new google.maps.Marker(
+      {position: MOCK_POSITION, map: this.map, icon: icon, title: 'Ubicación actual'});
+
+    /* update every 3 seconds */
+    this.source$.subscribe((_) => this.updateDriverLocation());
+  }
+
+  updateDriverLocation(){
+    /* si viaje no esta en curso, eliminar marker y no hacer nada */
+    if (!(['En camino', 'En origen', 'En viaje', 'Llegamos'].includes(this.trip.status))){
+      this.driverMarker.setMap(null);
+      return;
+    }
+    this.tripsService.getTripLocation(this.trip.id).subscribe(
+      (loc) => {
+        var newPos = new google.maps.LatLng(loc.currentLocation.lat, loc.currentLocation.lng);
+        this.driverMarker.setPosition(newPos);
+      });
   }
 
 }
