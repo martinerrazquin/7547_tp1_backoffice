@@ -14,8 +14,10 @@
     </button>
   </div>
   <mat-divider></mat-divider>
-  <form [formGroup]="filtersForm"
-    class="row mt-2 ml-2 mr-4 justify-content-between align-items-center">
+  <form
+    [formGroup]="filtersForm"
+    class="row mt-2 ml-2 mr-4 justify-content-between align-items-center"
+  >
     <mat-form-field class="col-md-8">
       <mat-label>Chofer</mat-label>
       <input matInput [formControlName]="'driverName'" placeholder="John Doe">
