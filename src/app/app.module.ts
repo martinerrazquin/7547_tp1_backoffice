@@ -31,6 +31,7 @@ import { DriverListComponent } from './components/driver-list/driver-list.compon
 
 import { registerLocaleData } from '@angular/common';
 import localeAr from '@angular/common/locales/es-AR';
+import { ClientListComponent } from './components/client-list/client-list.component';
 registerLocaleData(localeAr);
 
 const appRoutes: Routes = [
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
   { path: 'trips', component: TripListComponent },
   { path: 'trips/details/:id', component: TripDetailsComponent },
   { path: 'drivers', component: DriverListComponent },
+  { path: 'clients', component: ClientListComponent },
   { path: '',
     redirectTo: '/trips',
     pathMatch: 'full'
@@ -52,7 +54,8 @@ const appRoutes: Routes = [
     TripListComponent,
     TripCostHistoryComponent,
     TripDetailsComponent,
-    DriverListComponent
+    DriverListComponent,
+    ClientListComponent
   ],
   imports: [
     RouterModule.forRoot(
