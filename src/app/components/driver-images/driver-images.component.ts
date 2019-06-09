@@ -34,4 +34,8 @@ export class DriverImagesComponent implements OnInit {
     this.showingWhich = which;
   }
 
+  htmlForImage(img64: string): string {
+    return "data:image/jpeg;base64,"+img64;
+  }
+
 }
