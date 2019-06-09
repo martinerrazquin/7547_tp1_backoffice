@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';  /* async */
 
 import { DriversApi } from '../models/drivers-api';
 import { Driver } from '../models/driver';
+import { FullDriver } from '../models/full-driver';
 import {API_URL} from "./api_url";
 
 @Injectable({
@@ -23,5 +24,10 @@ export class DriversService {
   updateDriverEnabled(id: number, enabled: boolean): Observable<Driver> {
     const requestUrl = API_URL + `drivers/${id}/enabled-state`;
     return this.http.post(requestUrl, { enabled: enabled });
+  }
+
+  getDriverImages(id: number): Observable<FullDriver> {
+    const requestUrl = API_URL + `drivers/${id}/images`;
+    return this.http.get<FullDriver>(requestUrl);
   }
 }

@@ -1,0 +1,41 @@
+<h1 mat-dialog-title> Fotos provistas por {{ driverName }}</h1>
+<div mat-dialog-content>
+  <div>
+    <mat-tab-group>
+      <mat-tab label="Licencia">
+        <div class="m-3 p-2 border">
+          <div style="width: 512px; height: 512px;">
+            <div
+              *ngIf="!isLoading"
+              [sanitizeHtml]="htmlForImage(driverData.drivingRecordImage)"
+              class="w-100 h-100 d-flex justify-content-center align-items-center"
+            ></div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Seguro">
+        <div class="m-3 p-2 border">
+          <div style="width: 512px; height: 512px;">
+            <div
+              *ngIf="!isLoading"
+              [sanitizeHtml]="htmlForImage(driverData.policyImage)"
+              class="w-100 h-100 d-flex justify-content-center align-items-center"
+            ></div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Vehículo">
+        <div class="m-3 p-2 border">
+          <div style="width: 512px; height: 512px; object-fit: contain;">
+            <div
+              *ngIf="!isLoading"
+              [sanitizeHtml]="htmlForImage(driverData.transportImage)"
+              class="w-100 h-100 d-flex justify-content-center align-items-center"
+            ></div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+

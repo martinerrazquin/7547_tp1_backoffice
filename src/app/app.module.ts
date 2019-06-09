@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import {MatDialogModule} from "@angular/material";
 
 /* MATERIAL */
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -22,6 +23,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { TripcostsComponent } from './components/tripcosts/tripcosts.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
@@ -32,6 +34,8 @@ import { DriverListComponent } from './components/driver-list/driver-list.compon
 import { registerLocaleData } from '@angular/common';
 import localeAr from '@angular/common/locales/es-AR';
 import { ClientListComponent } from './components/client-list/client-list.component';
+import { DriverImagesComponent } from './components/driver-images/driver-images.component';
+import { SanitizeHtmlDirective } from './directives/sanitize-html.directive';
 registerLocaleData(localeAr);
 
 const appRoutes: Routes = [
@@ -55,7 +59,9 @@ const appRoutes: Routes = [
     TripCostHistoryComponent,
     TripDetailsComponent,
     DriverListComponent,
-    ClientListComponent
+    ClientListComponent,
+    DriverImagesComponent,
+    SanitizeHtmlDirective
   ],
   imports: [
     RouterModule.forRoot(
@@ -78,9 +84,12 @@ const appRoutes: Routes = [
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    MatTabsModule
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DriverImagesComponent]
 })
 export class AppModule { }
