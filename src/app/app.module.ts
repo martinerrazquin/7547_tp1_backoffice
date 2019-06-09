@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import {MatDialogModule} from "@angular/material";
 
 /* MATERIAL */
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -32,6 +33,7 @@ import { DriverListComponent } from './components/driver-list/driver-list.compon
 import { registerLocaleData } from '@angular/common';
 import localeAr from '@angular/common/locales/es-AR';
 import { ClientListComponent } from './components/client-list/client-list.component';
+import { DriverImagesComponent } from './components/driver-images/driver-images.component';
 registerLocaleData(localeAr);
 
 const appRoutes: Routes = [
@@ -55,7 +57,8 @@ const appRoutes: Routes = [
     TripCostHistoryComponent,
     TripDetailsComponent,
     DriverListComponent,
-    ClientListComponent
+    ClientListComponent,
+    DriverImagesComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -78,9 +81,11 @@ const appRoutes: Routes = [
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DriverImagesComponent]
 })
 export class AppModule { }

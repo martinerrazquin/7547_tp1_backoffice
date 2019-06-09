@@ -3,10 +3,12 @@ import {MatPaginator} from '@angular/material';
 import {Observable, of as observableOf, pipe} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
+import {MatDialog, MatDialogConfig} from "@angular/material";
 
 import { DriversService } from "../../services/drivers.service";
 import { DriversApi } from '../../models/drivers-api';
 import { Driver } from '../../models/driver';
+import { DriverImagesComponent } from "../driver-images/driver-images.component";
 
 @Component({
   selector: 'app-driver-list',
@@ -22,8 +24,9 @@ export class DriverListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private driversService: DriversService, 
-    private snackBar: MatSnackBar
+    private driversService: DriversService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -69,6 +72,15 @@ export class DriverListComponent implements OnInit {
     this.snackBar.open(message, null, {
       duration: 2000,
     });
+  }
+
+  openDialogDriverImages(id: number){
+    const dialogConfig = new MatDialogConfig();
+
+    // TODO: modify DriverImagesComponent to have data injected
+    //dialogConfig.data = {id: id};
+
+    this.dialog.open(DriverImagesComponent, dialogConfig);
   }
 
 }

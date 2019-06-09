@@ -68,6 +68,13 @@
               *ngIf="!driver.driverData.enabledToDrive">
               Habilitar
             </button>
+            <button
+              type="button"
+              class="btn btn-info"
+              (click)="openDialogDriverImages(driver.driverData.id)">
+              Ver fotos
+            </button>
+
           </div>
         </div>
       </div>
