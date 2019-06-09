@@ -4,6 +4,10 @@
 .sidenav {
     width: 200px;
     height: 296px;
+
+  .mat-list-item {
+    cursor: pointer;
+  }
 }
 
 .active-route {
