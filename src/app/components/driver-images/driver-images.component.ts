@@ -26,7 +26,6 @@ export class DriverImagesComponent implements OnInit {
       (fullDriverData) => {
         this.driverData = fullDriverData;
         this.isLoading = false;
-        console.log(this.driverData); //DEBUG
       }
     )
   }
