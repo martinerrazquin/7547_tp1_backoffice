@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-driver-images',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DriverImagesComponent implements OnInit {
 
-  constructor() { }
+  driverId: number;
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
+    this.driverId = this.data.id;
   }
 
 }

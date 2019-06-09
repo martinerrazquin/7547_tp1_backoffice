@@ -77,8 +77,7 @@ export class DriverListComponent implements OnInit {
   openDialogDriverImages(id: number){
     const dialogConfig = new MatDialogConfig();
 
-    // TODO: modify DriverImagesComponent to have data injected
-    //dialogConfig.data = {id: id};
+    dialogConfig.data = {id: id};
 
     this.dialog.open(DriverImagesComponent, dialogConfig);
   }
