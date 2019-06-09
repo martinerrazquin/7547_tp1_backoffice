@@ -40,20 +40,24 @@
       <mat-sidenav class="sidenav p-0 mt-4 mat-elevation-z2" mode="side" opened>
         <mat-list class="p-0">
           <mat-divider></mat-divider>
-          <mat-list-item routerLink="/trips" routerLinkActive="active-route"> 
-            Viajes 
+          <mat-list-item routerLink="/trips" routerLinkActive="active-route">
+            Viajes
           </mat-list-item>
           <mat-divider></mat-divider>
-          <mat-list-item routerLink="/trip-costs-history" routerLinkActive="active-route"> 
+          <mat-list-item routerLink="/trip-costs-history" routerLinkActive="active-route">
             Historial de Precios
           </mat-list-item>
           <mat-divider></mat-divider>
-          <mat-list-item routerLink="/trip-costs" routerLinkActive="active-route"> 
+          <mat-list-item routerLink="/trip-costs" routerLinkActive="active-route">
             Precios
           </mat-list-item>
           <mat-divider></mat-divider>
-          <mat-list-item routerLink="/drivers" routerLinkActive="active-route"> 
+          <mat-list-item routerLink="/drivers" routerLinkActive="active-route">
             Choferes
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/clients" routerLinkActive="active-route">
+            Clientes
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item (click)="logout()">
@@ -64,7 +68,7 @@
       </mat-sidenav>
       <mat-sidenav-content>
         <div class="m-3">
-          <router-outlet></router-outlet>  
+          <router-outlet></router-outlet>
         </div>
       </mat-sidenav-content>
     </mat-sidenav-container>

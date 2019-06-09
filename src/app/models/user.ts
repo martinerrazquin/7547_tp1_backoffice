@@ -11,6 +11,7 @@ export class User {
   driverData: Driver;
   createdAt: Date;
   updatedAt: Date;
+  enabledClient: boolean;
 }
 
 export const NO_USER: User = {
@@ -24,4 +25,5 @@ export const NO_USER: User = {
   driverData: null,
   createdAt: new Date,
   updatedAt: new Date,
+  enabledClient: true,
 };
