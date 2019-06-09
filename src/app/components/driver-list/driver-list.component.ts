@@ -74,10 +74,10 @@ export class DriverListComponent implements OnInit {
     });
   }
 
-  openDialogDriverImages(id: number){
+  openDialogDriverImages(driver: Driver){
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.data = {id: id};
+    dialogConfig.data = driver;
 
     this.dialog.open(DriverImagesComponent, dialogConfig);
   }

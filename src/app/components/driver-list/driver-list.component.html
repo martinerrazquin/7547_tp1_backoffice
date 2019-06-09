@@ -13,9 +13,9 @@
   <mat-divider class="mb-3"></mat-divider>
   <div class="container-fluid">
     <div class="row" *ngFor="let driver of drivers">
-      <div class="col-11 container-fluid card mb-3 mat-elevation-z2">
+      <div class="col-11 container-fluid card mb-3 mat-elevation-z2 p-0">
         <div class="row m-2">
-          <div class="col-md-7">
+          <div class="col-md-6">
             <div class="pt-2 pb-1">
               <div class="pull-left font-weight-bold pr-2">Nombre:</div>
               <div> {{driver.name}} </div>
@@ -37,7 +37,7 @@
               <div class="clearfix"></div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="pt-4 pb-1">
               <div class="pull-left font-weight-bold pr-2">Total a pagar</div>
               <div class="clearfix"></div>
@@ -53,28 +53,27 @@
               <div class="clearfix"></div>
             </div>
           </div>
-          <div class="col-md-1 row justify-content-center align-items-center">
+          <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
             <button
               type="button"
-              class="btn btn-danger"
+              class="btn btn-info my-1 align-self-stretch"
+              (click)="openDialogDriverImages(driver)">
+              Ver Fotos
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger my-1 align-self-stretch"
               (click)="onToggleEnabledClick(driver.driverData.id, false)"
               *ngIf="driver.driverData.enabledToDrive">
               Deshabilitar
             </button>
             <button
               type="button"
-              class="btn btn-success"
+              class="btn btn-success my-1 align-self-stretch"
               (click)="onToggleEnabledClick(driver.driverData.id, true)"
               *ngIf="!driver.driverData.enabledToDrive">
               Habilitar
             </button>
-            <button
-              type="button"
-              class="btn btn-info"
-              (click)="openDialogDriverImages(driver.driverData.id)">
-              Ver fotos
-            </button>
-
           </div>
         </div>
       </div>

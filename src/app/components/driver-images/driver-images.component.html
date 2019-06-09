@@ -1,36 +1,41 @@
-<h1 mat-dialog-title> Fotos del chofer de id {{ driverId }}</h1>
+<h1 mat-dialog-title> Fotos provistas por {{ driverName }}</h1>
 <div mat-dialog-content>
   <div>
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="onShowPicClick(1)">
-      Licencia
-    </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="onShowPicClick(2)">
-      Seguro
-    </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="onShowPicClick(3)">
-      Vehículo
-    </button>
-  </div>
-  <div *ngIf="showingWhich == 1 && !isLoading">
-    <p>Foto de Licencia</p>
-    <div [sanitizeHtml]="htmlForImage(driverData.drivingRecordImage)"></div>
-  </div>
-  <div *ngIf="showingWhich == 2 && !isLoading">
-    <p>Foto del Seguro</p>
-    <div [sanitizeHtml]="htmlForImage(driverData.policyImage)"></div>
-  </div>
-  <div *ngIf="showingWhich == 3 && !isLoading">
-    <p>Foto del Vehículo</p>
-    <div [sanitizeHtml]="htmlForImage(driverData.transportImage)"></div>
+    <mat-tab-group>
+      <mat-tab label="Licencia">
+        <div class="m-3 p-2 border">
+          <div style="width: 512px; height: 512px;">
+            <div
+              *ngIf="!isLoading"
+              [sanitizeHtml]="htmlForImage(driverData.drivingRecordImage)"
+              class="w-100 h-100 d-flex justify-content-center align-items-center"
+            ></div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Seguro">
+        <div class="m-3 p-2 border">
+          <div style="width: 512px; height: 512px;">
+            <div
+              *ngIf="!isLoading"
+              [sanitizeHtml]="htmlForImage(driverData.policyImage)"
+              class="w-100 h-100 d-flex justify-content-center align-items-center"
+            ></div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Vehículo">
+        <div class="m-3 p-2 border">
+          <div style="width: 512px; height: 512px; object-fit: contain;">
+            <div
+              *ngIf="!isLoading"
+              [sanitizeHtml]="htmlForImage(driverData.transportImage)"
+              class="w-100 h-100 d-flex justify-content-center align-items-center"
+            ></div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>
 

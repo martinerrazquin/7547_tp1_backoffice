@@ -12,7 +12,7 @@ import {FullDriver} from "../../models/full-driver";
 export class DriverImagesComponent implements OnInit {
 
   driverId: number;
-  showingWhich: number;
+  driverName: string;
   driverData: FullDriver;
   isLoading: boolean = true;
 
@@ -21,7 +21,8 @@ export class DriverImagesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.driverId = this.data.id;
+    this.driverId = this.data.driverData.id;
+    this.driverName = this.data.name;
     this.driversService.getDriverImages(this.driverId).subscribe(
       (fullDriverData) => {
         this.driverData = fullDriverData;
@@ -30,13 +31,10 @@ export class DriverImagesComponent implements OnInit {
     )
   }
 
-  onShowPicClick(which: number): void {
-    this.showingWhich = which;
-  }
-
   htmlForImage(img64: string): string {
     return `<img
       src="data:image/jpeg;base64, ${img64}"
+      style="max-width: 100%; max-height: 100%; object-fit: contain;"
       />`;
   }
 

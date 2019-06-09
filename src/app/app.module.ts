@@ -23,6 +23,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { TripcostsComponent } from './components/tripcosts/tripcosts.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
@@ -84,7 +85,8 @@ const appRoutes: Routes = [
     MatInputModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
