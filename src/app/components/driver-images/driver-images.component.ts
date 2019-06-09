@@ -17,7 +17,8 @@ export class DriverImagesComponent implements OnInit {
   isLoading: boolean = true;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private driversService: DriversService) { }
+              private driversService: DriversService) {
+  }
 
   ngOnInit() {
     this.driverId = this.data.id;
@@ -35,7 +36,9 @@ export class DriverImagesComponent implements OnInit {
   }
 
   htmlForImage(img64: string): string {
-    return "data:image/jpeg;base64,"+img64;
+    return `<img
+      src="data:image/jpeg;base64, ${img64}"
+      />`;
   }
 
 }

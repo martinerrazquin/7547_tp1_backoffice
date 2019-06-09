@@ -30,21 +30,15 @@
   </div>
   <div *ngIf="showingWhich == 1 && !isLoading">
     <p>Foto de Licencia</p>
-    <img
-      src="data:image/jpeg;base64, {{ driverData.drivingRecordImage }}"
-    />
+    <div [sanitizeHtml]="htmlForImage(driverData.drivingRecordImage)"></div>
   </div>
   <div *ngIf="showingWhich == 2 && !isLoading">
     <p>Foto del Seguro</p>
-    <img
-      src="data:image/jpeg;base64, {{ driverData.policyImage }}"
-    />
+    <div [sanitizeHtml]="htmlForImage(driverData.policyImage)"></div>
   </div>
   <div *ngIf="showingWhich == 3 && !isLoading">
     <p>Foto del Vehículo</p>
-    <img
-      src="data:image/jpeg;base64, {{ driverData.transportImage }}"
-    />
+    <div [sanitizeHtml]="htmlForImage(driverData.transportImage)"></div>
   </div>
 </div>
 

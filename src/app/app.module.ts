@@ -34,6 +34,7 @@ import { registerLocaleData } from '@angular/common';
 import localeAr from '@angular/common/locales/es-AR';
 import { ClientListComponent } from './components/client-list/client-list.component';
 import { DriverImagesComponent } from './components/driver-images/driver-images.component';
+import { SanitizeHtmlDirective } from './directives/sanitize-html.directive';
 registerLocaleData(localeAr);
 
 const appRoutes: Routes = [
@@ -58,7 +59,8 @@ const appRoutes: Routes = [
     TripDetailsComponent,
     DriverListComponent,
     ClientListComponent,
-    DriverImagesComponent
+    DriverImagesComponent,
+    SanitizeHtmlDirective
   ],
   imports: [
     RouterModule.forRoot(
