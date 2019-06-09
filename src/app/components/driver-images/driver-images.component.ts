@@ -9,11 +9,16 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 export class DriverImagesComponent implements OnInit {
 
   driverId: number;
+  showingWhich: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
     this.driverId = this.data.id;
+  }
+
+  onShowPicClick(which: number): void {
+    this.showingWhich = which;
   }
 
 }
