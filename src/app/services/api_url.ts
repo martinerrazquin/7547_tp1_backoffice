@@ -1,1 +1,1 @@
-export const API_URL: string = "https://stagingserver7547.herokuapp.com/";//"http://localhost:3000/"
+export const API_URL: string = "http://localhost:3000/";//"https://stagingserver7547.herokuapp.com/"

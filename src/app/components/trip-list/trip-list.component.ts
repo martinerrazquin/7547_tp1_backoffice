@@ -3,6 +3,8 @@ import {MatPaginator, MatTableDataSource, MatButton, MatSlideToggle} from '@angu
 import {merge, Observable, of as observableOf, fromEvent} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import {FormGroup, FormControl} from '@angular/forms';
+import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {MatDatepicker} from '@angular/material/datepicker';
 
 import { TripsService } from "../../services/trips.service";
 import { TripsApi } from '../../models/trips-api';
@@ -11,7 +13,23 @@ import { Trip } from '../../models/trip';
 @Component({
   selector: 'app-trip-list',
   templateUrl: './trip-list.component.html',
-  styleUrls: ['./trip-list.component.scss']
+  styleUrls: ['./trip-list.component.scss'],
+  providers: [
+    {
+      provide: MAT_DATE_FORMATS, 
+      useValue: {
+        parse: {
+          dateInput: 'MM/YYYY',
+        },
+        display: {
+          dateInput: 'MM/YYYY',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      }
+    },
+  ],
 })
 export class TripListComponent implements OnInit {
   displayedColumns: string[] = [
@@ -27,14 +45,17 @@ export class TripListComponent implements OnInit {
 
   filterControls = {
     driverName: new FormControl(''),
-    showOnlyCurrent: new FormControl(false)
+    showOnlyCurrent: new FormControl(false),
+    month: new FormControl(new Date())
   };
   filtersForm = new FormGroup(this.filterControls);
 
   resultsLength: number;
   isLoading: boolean = false;
   dataSource: MatTableDataSource<Trip>;
-  
+
+  maxDate: Date = new Date();
+  totalMoney: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('reload') reloadButton: MatButton;
@@ -59,11 +80,16 @@ export class TripListComponent implements OnInit {
       startWith({}),
       switchMap(() => {
         this.isLoading = true;
-        return this.tripsService.getTrips(this.paginator.pageIndex, this.filtersForm.value);
+        var filters = Object.assign({}, this.filtersForm.value);
+        var month = (filters.month.getMonth() + 1);
+        var year = filters.month.getFullYear();
+        filters.month = String(month).padStart(2, '0') + '/' + year;
+        return this.tripsService.getTrips(this.paginator.pageIndex, filters);
       }),
       map((tripsApi: TripsApi) => {
         this.isLoading = false;
         this.resultsLength = tripsApi.total;
+        this.totalMoney = tripsApi.totalMoney;
 
         return tripsApi.pageContents;
       }),
@@ -75,5 +101,19 @@ export class TripListComponent implements OnInit {
     ).subscribe(trips =>
       this.dataSource = new MatTableDataSource(trips)
     );
+  }
+
+  chosenYearHandler(normalizedYear) {
+    const ctrlValue = this.filterControls.month.value;
+    ctrlValue.setDate(1);
+    ctrlValue.setYear(normalizedYear.year());
+    this.filterControls.month.setValue(ctrlValue);
+  }
+
+  chosenMonthHandler(normalizedMonth, datepicker) {
+    const ctrlValue = this.filterControls.month.value;
+    ctrlValue.setMonth(normalizedMonth.month());
+    this.filterControls.month.setValue(ctrlValue);
+    datepicker.close();
   }
 }

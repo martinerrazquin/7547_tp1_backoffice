@@ -22,6 +22,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MomentDateModule} from '@angular/material-moment-adapter';
 
 import { TripcostsComponent } from './components/tripcosts/tripcosts.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
@@ -78,7 +80,9 @@ const appRoutes: Routes = [
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDatepickerModule,
+    MomentDateModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

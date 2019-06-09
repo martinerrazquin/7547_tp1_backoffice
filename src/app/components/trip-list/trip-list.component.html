@@ -18,10 +18,24 @@
     [formGroup]="filtersForm"
     class="row mt-2 ml-2 mr-4 justify-content-between align-items-center"
   >
-    <mat-form-field class="col-md-8">
+    <mat-form-field class="col-md-5">
       <mat-label>Chofer</mat-label>
       <input matInput [formControlName]="'driverName'" placeholder="John Doe">
     </mat-form-field>
+
+
+    <mat-form-field class="col-md-2">
+      <input matInput [max]="maxDate" [matDatepicker]="dp" placeholder="Mes y Año" [formControlName]="'month'">
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp
+                      startView="multi-year"
+                      (yearSelected)="chosenYearHandler($event)"
+                      (monthSelected)="chosenMonthHandler($event, dp)"
+                      panelClass="example-month-picker">
+      </mat-datepicker>
+    </mat-form-field>
+
+
     <mat-slide-toggle [formControlName]="'showOnlyCurrent'" color="primary" labelPosition="before">
       Solo viajes en curso
     </mat-slide-toggle>
@@ -93,5 +107,10 @@
       <mat-paginator [length]="resultsLength" [pageSize]="10">
       </mat-paginator>
     </div>
+  </div>
+  <mat-divider class="mt-4 mb-2"></mat-divider>
+  <div class="d-flex justify-content-end mr-3">
+    <div class="pull-left font-weight-bold pr-2">Total Facturado: </div>
+    <div> {{totalMoney | currency:'ARS':'symbol':'1.2-2':'es-AR' }} </div>
   </div>
 </div>
