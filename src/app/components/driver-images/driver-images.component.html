@@ -1,7 +1,8 @@
 <h1 mat-dialog-title> Fotos del chofer de id {{ driverId }}</h1>
 <div mat-dialog-content>
+  <!--
   <div>
-  <p>Fotito de Licencia</p>
+  <p>Fotito Trucha de Licencia</p>
   <img
     *ngIf="showingWhich == 1"
     src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSEhM
@@ -110,6 +111,28 @@
   5qB1QOYk2AGpJOgsBrxV2YrsZQ1As+nYD9aO8L/wAcRaT4pLgfR7h9LIJo4LyjVr5Hvlc37uckNPaBdGiBD0RbLOoKBjZG5ZpXddKOLSQA1h+60D
   TmSpwsALKkAQhCABCEIAEIQgAQhCABCEIAEIQgAQhCABalCEAYKDuWEIAbcVlcLWJHcSE0R1cl/ff+IoQgCQ0TiWC5ulTFhCAN0IQgAWEIQBlCEI
   AEIQgAQhCABCEIAEIQgD//2Q==" alt="Maquinola" />
+  </div>
+  -->
+  <div>
+    <p>Foto de Licencia</p>
+    <img
+      *ngIf="showingWhich == 1 && !isLoading"
+      src="data:image/jpeg;base64, {{ driverData.drivingRecordImage }}"
+    />
+  </div>
+  <div>
+    <p>Foto del Seguro</p>
+    <img
+      *ngIf="showingWhich == 2 && !isLoading"
+      src="data:image/jpeg;base64, {{ driverData.policyImage }}"
+    />
+  </div>
+  <div>
+    <p>Foto del Vehículo</p>
+    <img
+      *ngIf="showingWhich == 3 && !isLoading"
+      src="data:image/jpeg;base64, {{ driverData.transportImage }}"
+    />
   </div>
   <div>
     <button
