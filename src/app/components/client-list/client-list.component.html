@@ -38,7 +38,7 @@
             </div>
             <div class="pb-1">
               <div class="pull-left font-weight-bold pr-2"> Fecha de nacimiento: </div>
-              <div> {{client.birthDate | date: "dd/MM/yyyy"}} </div>
+              <div> {{fixDate(client.birthDate) | date: "dd/MM/yyyy"}} </div>
               <div class="clearfix"></div>
             </div>
             <div class="pb-2">
