@@ -65,4 +65,8 @@ export class ClientListComponent implements OnInit {
       duration: 2000,
     });
   }
+
+  fixDate(date: Date): Date {
+    return new Date(new Date(date).getTime() + 3*60*60*1000);
+  }
 }
