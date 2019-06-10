@@ -46,7 +46,7 @@ export class TripListComponent implements OnInit {
   filterControls = {
     driverName: new FormControl(''),
     showOnlyCurrent: new FormControl(false),
-    month: new FormControl(new Date())
+    month: new FormControl('')
   };
   filtersForm = new FormGroup(this.filterControls);
 
@@ -81,9 +81,11 @@ export class TripListComponent implements OnInit {
       switchMap(() => {
         this.isLoading = true;
         var filters = Object.assign({}, this.filtersForm.value);
-        var month = (filters.month.getMonth() + 1);
-        var year = filters.month.getFullYear();
-        filters.month = String(month).padStart(2, '0') + '/' + year;
+        if (filters.month) {
+          var month = (filters.month.getMonth() + 1);
+          var year = filters.month.getFullYear();
+          filters.month = String(month).padStart(2, '0') + '/' + year;
+        }
         return this.tripsService.getTrips(this.paginator.pageIndex, filters);
       }),
       map((tripsApi: TripsApi) => {
@@ -104,10 +106,12 @@ export class TripListComponent implements OnInit {
   }
 
   chosenYearHandler(normalizedYear) {
-    const ctrlValue = this.filterControls.month.value;
-    ctrlValue.setDate(1);
-    ctrlValue.setYear(normalizedYear.year());
-    this.filterControls.month.setValue(ctrlValue);
+    if (!this.filterControls.month.value) {
+      this.filterControls.month.setValue(new Date());
+    }
+    this.filterControls.month.value.setDate(1);
+    this.filterControls.month.value.setYear(normalizedYear.year());
+    this.filterControls.month.setValue(this.filterControls.month.value);
   }
 
   chosenMonthHandler(normalizedMonth, datepicker) {
